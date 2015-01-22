@@ -1,0 +1,19 @@
+
+<h1>
+    Frequently Asked Questions
+</h1>
+
+<hr>
+<ul>
+  <% @common_questions.each do |links| %>
+  <li><%= link_to links.question, "##{links.slug}" %></li>
+  <% end %>
+</ul>
+
+<% @common_questions.each do |links| %>
+<a name="<%= "#{links.slug}" %>" ></a> <strong><%= links.question %></strong>
+
+ <p><%= links.answer %></p>
+<p> <%= link_to "top", "#top" %></p>
+
+ <% end %>
