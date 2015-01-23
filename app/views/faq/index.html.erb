@@ -1,9 +1,8 @@
 
-<h1>
+<div class=page-header><h1>
     Frequently Asked Questions
-</h1>
+</h1></div>
 
-<hr>
 <ul>
   <% @common_questions.each do |links| %>
   <li><%= link_to links.question, "##{links.slug}" %></li>
