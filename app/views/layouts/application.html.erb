@@ -8,64 +8,62 @@
 </head>
 
 <body>
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container">
 
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">gCamp</a>
-        </div>
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">gCamp</a>
       </div>
-
     </div>
+  </div>
 
+  <div class="container">
+    <%= yield %>
 
     <hr>
-<div class="container">
-  <%= yield %>
-      <footer>
-        <div class="row">
-          <div class="col-md-6">
+    
+    <footer>
+      <div class="row">
 
-            <%=link_to "About", about_path %>
+        <div class="col-md-6">
 
-            |
+          <%=link_to "About", about_path %>
 
-            <%=link_to "Terms", terms_path %>
+          |
 
-            |
+          <%=link_to "Terms", terms_path %>
 
-            <%=link_to "FAQ", faq_path %>
+          |
 
-            |
+          <%=link_to "FAQ", faq_path %>
 
-            <%=link_to "Tasks", tasks_path %>
+          |
 
-
-          </div>
-          <div class="col-md-6 text-right">
-            <a href="https://www.linkedin.com/in/ninajlisitsa">
-              <%= image_tag('linked_in-f852478f8950eb3fca3367cb545aaa52.jpg',class: "img-footer") %></a>
+          <%=link_to "Tasks", tasks_path %>
+        </div>
+        <div class="col-md-6 text-right">
+          <a href="https://www.linkedin.com/in/ninajlisitsa">
+            <%= image_tag('linked_in-f852478f8950eb3fca3367cb545aaa52.jpg',class: "img-footer") %></a>
             <a href="https://github.com/Ninajl">
               <%= image_tag('GitHub-de8164cc6a609537cfdab331e002ebb3.png', class: "img-footer") %></a>
-            <a href="https://twitter.com/Ninajl">
-              <%= image_tag('Twitter-0c8c529fb7181e05ab5c30416e3a70fa.png',class: "img-footer") %></a>
-            <a href="https://students.gschool.it/cohorts/9/students/220">
-              <%= image_tag('galvanize-g-b3da24895ed7d4fd33c43d9226c16242.png', class: "img-footer") %></a>
-        </div>
-      </div>
-    </footer>
-  </div>
-   <!-- /container -->
+              <a href="https://twitter.com/Ninajl">
+                <%= image_tag('Twitter-0c8c529fb7181e05ab5c30416e3a70fa.png',class: "img-footer") %></a>
+                <a href="https://students.gschool.it/cohorts/9/students/220">
+                  <%= image_tag('galvanize-g-b3da24895ed7d4fd33c43d9226c16242.png', class: "img-footer") %></a>
+                </div>
+              </div>
+            </footer>
+          </div>
+          <!-- /container -->
 
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="../../dist/js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+          <!-- Bootstrap core JavaScript
+          ================================================== -->
+          <!-- Placed at the end of the document so the pages load faster -->
+          <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+          <script src="../../dist/js/bootstrap.min.js"></script>
+          <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+          <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
-</body>
-</html>
+        </body>
+        </html>
