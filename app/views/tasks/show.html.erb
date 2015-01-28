@@ -11,10 +11,5 @@
     <li class="active"><%= @task.description %></li>
   </ol>
 
-<!--<p>
-  <strong>Description:</strong>
-  <%= @task.description %>
-</p>
--->
-<%= link_to 'Edit', edit_task_path(@task) %> |
-<%= link_to 'Back', tasks_path %>
+<strong>Due on:</strong>
+  <%= @task.task_due_date %>

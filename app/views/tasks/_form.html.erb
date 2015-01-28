@@ -12,23 +12,44 @@
     </div>
   <% end %>
 
-    <div class="form-group">
+<div class="form-group">
       <div class= "field">
         <div class="control-label col-md-2">
       <%= f.label :description %>
-    </div>
+        </div>
     <div class="col-md-4">
       <%= f.text_field :description, class: "form-control" %>
     </div>
 </div>
 </div>
+
+  <div class="form-group">
+        <div class="control-label col-md-2">
+        <%= f.label :due_date %>
+      </div>
+      <div class="col-md-4">
+        <%= f.date_select :task_due_date, class: 'form-control' %>
+      </div>
+  </div>
+
+<% if @task.description != nil %>
+
 <div class="form-group">
-<div class="col-md-4 col-md-offset-2">
-    <div class="action">
+    <div class="control-label col-md-2">
+Completed
+</div>
+<div class="col-md-4">
+  <%= f.check_box(:completed) %>
+</div>
+  </div>
+<% end %>
+
+  <div class="form-group">
+    <div class="col-md-4 col-md-offset-2">
+      <div class="action">
         <%= f.submit class: 'btn btn-primary' %>
         <%= link_to 'Cancel', tasks_path, class:'btn btn-default' %>
-
-  </div>
+      </div>
 </div>
 </div>
   <% end %>
