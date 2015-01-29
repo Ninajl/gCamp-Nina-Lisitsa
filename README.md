@@ -1,19 +1,5 @@
 gCamp project
 
-[View On Heroku](http://www.lit-thicket-7246.herokuapp.com/)
-
-
-
-To install:
-
-```
-
-bundle
-rake db:create db:migrate db:seed
-rails s
-
-```
-
 == README
 
 * Ruby version
