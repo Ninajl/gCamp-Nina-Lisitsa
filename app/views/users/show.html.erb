@@ -1,2 +1,22 @@
+<div class=page-header>
+  <div class=pull-right>
+      <%= link_to 'Edit', edit_user_path, class: 'btn btn-info' %>
+</div>
+<h1><strong><%= @user.fullname %></strong></h1>
+</div>
 
-<a href="/users">Users</a>
+<ol class="breadcrumb">
+<li><a href="/users">Users</a></li>
+<li class="active"><%= @user.fullname %></li>
+</ol>
+
+<dl class=dl-horizontal>
+  <p><dt><strong>First name</strong></dt><p>
+  <p><dd><%= @user.first_name %></dd></p
+
+  <p><dt><strong>Last name</strong></dt></p>
+  <p><dd><%= @user.last_name %></dd></p
+
+  <p><dt><strong>Email</strong></dt></p>
+  <p><dd><%= mail_to @user.email %></dd></p>
+</dl>

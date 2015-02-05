@@ -4,6 +4,9 @@
   <h1>Edit User</h1>
 </div>
 
-
+<ol class="breadcrumb">
+  <li><a href="/users">Users</a></li>
+  <li class="active"><%= @user.fullname %></li>
+</ol>
 
 <%= render 'form'%>
