@@ -1,5 +1,6 @@
 class FaqController <ApplicationController
-
+  before_action :authenticate
+  
   def index
     @question1 = CommonQuestion.new
     @question1.question = "What is gCamp?"
