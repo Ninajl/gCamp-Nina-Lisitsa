@@ -1,6 +1,7 @@
 class User < ActiveRecord::Base
-  has_secured_password
-  validates :first_name, :last_name, :email, presence: true, uniqueness: true
+  has_secure_password
+  validates :first_name, :last_name, :password, presence: true
+  validates :email, presence: true, uniqueness: true
 
   def fullname
     "#{first_name} #{last_name}"
