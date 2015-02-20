@@ -1,0 +1,38 @@
+<div class="well col-md-4 col-md-offset-4">
+  <h1>Sign Up for gCamp!</h1>
+<%= form_for @user do |f| %>
+<%= render 'shared/error', object: @user %>
+
+
+<div class="form-group">
+    <%= f.label :first_name, class: "control-label"%>
+    <%= f.text_field :first_name, class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= f.label :last_name, class: "control-label" %>
+    <%= f.text_field :last_name, class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= f.label :email, class: "control-label" %>
+    <%= f.email_field :email, class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= f.label :password, class: "control-label" %>
+    <%= f.password_field :password, class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <%= f.label :password_confirmation, class: "control-label" %>
+    <%= f.password_field :password, class: "form-control" %>
+</div>
+
+<div class="form-group">
+    <div class="action">
+      <%= f.submit 'Sign Up', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
+</div>
