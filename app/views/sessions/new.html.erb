@@ -1,9 +1,22 @@
+<div class="well col-md-4 col-md-offset-4">
 <%= form_tag signin_path do %>
+<h1>Sign into gCamp!</h1>
+<div class="form-group">
+<%= label_tag :email, nil %>
+<br>
+<%= email_field_tag :email, nil, class: "form-control" %>
+</div>
 
-<%= label_tag :email %>
-<%= email_field_tag :email %><br>
-<%= label_tag :password %>
-<%= password_field_tag :password %>
-<%= submit_tag 'Sign In' %>
+<div class="form-group">
+<%= label_tag :password, nil %>
+<br>
+<%= password_field_tag :password, nil, class: "form-control" %>
+</div>
 
+<div class="form-group">
+  <div class="action">
+<%= submit_tag 'Sign In', class: 'btn btn-primary' %>
 <% end %>
+</div>
+</div>
+</div>
