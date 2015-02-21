@@ -1,6 +1,14 @@
 <div class="well col-md-4 col-md-offset-4">
 <%= form_tag signin_path do %>
+
 <h1>Sign into gCamp!</h1>
+
+<br>
+
+<% if @sign_in_error %>
+<div class="alert alert-danger"><%= @sign_in_error %></div>
+<% end %>
+
 <div class="form-group">
 <%= label_tag :email, nil %>
 <br>
