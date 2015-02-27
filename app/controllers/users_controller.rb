@@ -1,6 +1,6 @@
 class UsersController <ApplicationController
-  before_action :authenticate
-  
+  #  before_action :authenticate
+
 
     def index
       @users = User.all
@@ -32,7 +32,7 @@ class UsersController <ApplicationController
         @user = User.find(params[:id])
         if @user.update(user_params)
 
-          redirect_to users_path
+          redirect_to users_path,  notice: 'User was successfully updated.'
         else
           render :edit
         end
