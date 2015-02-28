@@ -3,19 +3,22 @@
   <div class=pull-right>
       <%= link_to 'New Project', new_project_path, class: 'btn btn-primary' %>
   </div>
-  <h1>Projects<h1>
+  <h1>Projects</h1>
+
   </div>
 
 <table class="table">
   <thead>
-    <tr>
+    <tr colspan="3">
       <th>Name</th>
+      <th>Tasks</th>
     </tr>
   </thead>
   <tbody>
     <% @projects.each do |project| %>
     <tr>
       <td><%= link_to project.name, project_path(project) %></td>
+      <td><%= link_to "#{project.tasks.count}", project_tasks_path(project) %></td>
     </tr>
   </tbody>
   <% end %>
