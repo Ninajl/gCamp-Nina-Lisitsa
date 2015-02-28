@@ -4,6 +4,7 @@
   <div class=pull-right>
     <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info' %>
     <%= link_to 'Destroy', project_path(@project), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+    <!-- <%= link_to 'New Task', new_project_task_path(@project), class: 'btn btn-primary' %> -->
   </div>
 
 <h1><strong><%= @project.name %></strong></h1>
@@ -12,4 +13,8 @@
 <ol class="breadcrumb">
   <li><a href="/projects">Projects</a></li>
   <li class="active"><%= @project.name %></li>
+  <!-- <li class="active"><%= @tasks %></li> -->
 </ol>
+<p>
+  <%= link_to "#{@project.tasks.count} #{"Task"}", project_tasks_path(@project)  %>
+</p>

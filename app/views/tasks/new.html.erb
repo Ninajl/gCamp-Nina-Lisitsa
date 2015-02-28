@@ -3,7 +3,7 @@
 <div class=page-header><h1>New Task</h1></div>
 
 <ol class="breadcrumb">
-  <li><a href="/tasks">Tasks</a></li>
+  <li><%= link_to 'New Task', new_project_task_path(@project), class: 'btn btn-primary' %></li>
   <li class="active">New Task</li>
 </ol>
 
