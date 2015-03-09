@@ -14,4 +14,5 @@ class ApplicationController < ActionController::Base
     if not current_user
       redirect_to signup_path, notice: "Not signed in!"
     end
+
 end

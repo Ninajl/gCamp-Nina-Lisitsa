@@ -1,63 +1,85 @@
 require 'rails_helper'
 
-describe 'User can CRUD new user' do
+  describe 'User can CRUD new user' do
 
-  before :each do
-    visit "/"
-    click_on "Users"
-  end
+    before :each do
+      user = User.create(
+        first_name: "TestName",
+        last_name: "TestLastName",
+        email: "Test@Email.com",
+        password: "P",
+        password_confirmation: "P"
+      )
+      visit root_path
 
-  scenario "User can create a new User" do
-    click_on "New User"
-    expect(page).to have_content("New User")
+      click_on "Sign In"
+      expect(page).to have_content("Sign into gCamp!")
 
-    fill_in 'user[first_name]', :with => "TestName"
-    fill_in 'user[last_name]', :with => "TestLastName"
-    fill_in 'user[email]', :with => "Test@Email.com"
-    fill_in 'user[password]', :with => "P"
-    fill_in 'user[password_confirmation]', :with => "P"
-    click_on "Create User"
-    expect(page).to have_content("TestName")
+      fill_in "Email", with: @user.email
+      fill_in "Password", with: @user.password
+      click_button "Sign In"
+      expect(page).to have_content(@user.email)
+    end
 
-  end
+    scenario "User can create a new User" do
+      visit '/users'
+      click_on "New User"
+      expect(page).to have_content("New User")
 
-  scenario "User can view user show page" do
-    @user = User.create(first_name: "TestName", last_name: "TestLastName", email: "Test@Email.com", password: "P", password_confirmation: "P")
+      fill_in 'user[first_name]', :with => "OtherName"
+      fill_in 'user[last_name]', :with => "OtherLastName"
+      fill_in 'user[email]', :with => "Other@Email.com"
+      fill_in 'user[password]', :with => "P"
+      fill_in 'user[password_confirmation]', :with => "P"
+      click_on "Create User"
+      expect(page).to have_content("OtherName")
 
-    visit "/users"
+    end
 
-    click_on "TestName"
-    expect(page).to have_content("TestName")
+    scenario "User can view user show page" do
 
-  end
-  # # #
-  scenario "User can edit a user" do
-    @user = User.create(first_name: "TestName", last_name: "TestLastName", email: "Test@Email.com", password: "P", password_confirmation: "P")
+      visit "/users"
 
-    visit "/users"
-    # click_on "TestName"
-    # expect(page).to have_content("TestName")
-    click_on "Edit"
-    expect(page).to have_content("Edit User")
+      click_on @user.fullname
+      expect(page).to have_content(@user.fullname)
 
-    fill_in 'user[first_name]', :with => "TestEdit"
-    fill_in 'user[last_name]', :with => "TestLastEdit"
-    fill_in 'user[email]', :with => "Testedit@Email.com"
-    fill_in 'user[password]', :with => "T"
-    fill_in 'user[password_confirmation]', :with => "T"
+    end
 
-    click_on "Update User"
-    # expect(page).to have_content("Project was successfully updated.")
-    expect(page).to have_content("TestEdit")
-  end
-  # #
-  scenario "User can delete a user" do
-    @user = User.create(first_name: "TestName", last_name: "TestLastName", email: "Test@Email.com", password: "P", password_confirmation: "P")
+    scenario "User can edit a user" do
+      visit "/users"
+      # click_on "TestName"
+      # expect(page).to have_content("TestName")
+      expect(page).to have_content(@user.fullname)
+      click_on "Edit"
+      expect(page).to have_content("Edit User")
 
-    visit "/users"
-    expect(page).to have_content "TestName"
-    click_on "Delete"
-    expect(page).to have_content "Users"
-  end
+      fill_in 'user[first_name]', :with => "TestEdit"
+      fill_in 'user[last_name]', :with => "TestLastEdit"
+      fill_in 'user[email]', :with => "Testedit@Email.com"
+      fill_in 'user[password]', :with => "T"
+      fill_in 'user[password_confirmation]', :with => "T"
+
+      click_on "Update User"
+      expect(page).to have_content("User was successfully updated.")
+      expect(page).to have_content("TestEdit TestLastEdit")
+      expect(page).to_not have_content(@user.fullname)
+    end
+
+    scenario "User can delete a user" do
+      other_user = User.create(
+        first_name: "OtherName",
+        last_name: "OtherLastName",
+        email: "Other@Email.com",
+        password: "P",
+        password_confirmation: "P"
+      )
+      visit "/users"
+      expect(page).to have_content other_user.fullname
+      click_on other_user.fullname
+      click_on "Edit"
+      click_on "Delete"
+      expect(page).to have_content "Users"
+      expect(page).to_not have_content other_user.fullname
+    end
 
 end

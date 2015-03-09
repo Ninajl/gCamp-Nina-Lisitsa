@@ -1,13 +1,28 @@
 require 'rails_helper'
 
-describe 'User can CRUD new project' do
+  describe 'User can CRUD projects' do
 
-  before :each do
-    visit "/"
-    click_on "Projects"
-  end
+    before :each do
+      user = User.create(
+      first_name: "TestName",
+      last_name: "TestLastName",
+      email: "Test@Email.com",
+      password: "P",
+      password_confirmation: "P"
+      )
+      visit root_path
+
+      click_on "Sign In"
+      expect(page).to have_content("Sign into gCamp!")
+
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
+      click_button "Sign In"
+      expect(page).to have_content(user.email)
+    end
 
   scenario "User can create a new Project" do
+    visit '/projects'
     click_on "New Project"
     expect(page).to have_content("Create Project")
 
@@ -18,7 +33,7 @@ describe 'User can CRUD new project' do
   end
 
   scenario "User can view project show page" do
-    Project.create(:name => "TestName")
+    Project.create!(:name => "TestName")
 
     visit "/projects"
 
@@ -28,7 +43,7 @@ describe 'User can CRUD new project' do
   end
 #
   scenario "User can edit a project" do
-    Project.create(:name => "TestName")
+    Project.create!(:name => "TestName")
 
     visit "/projects"
     click_on "TestName"
@@ -43,11 +58,11 @@ describe 'User can CRUD new project' do
   end
 
   scenario "User can delete a project" do
-    Project.create(:name => "TestName")
+    Project.create!(:name => "TestName")
 
     visit "/projects"
     click_on "TestName"
-    click_on "Destroy"
+    click_on "Delete"
     expect(page).to have_content "Projects"
   end
 

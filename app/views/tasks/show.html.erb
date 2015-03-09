@@ -13,4 +13,4 @@
   </ol>
 
   <strong>Due on:</strong>
-  <%= @task.task_due_date.to_s.gsub("-", "/") %>
+  <%= @task.task_due_date.strftime("%m/%d/%Y") %>
