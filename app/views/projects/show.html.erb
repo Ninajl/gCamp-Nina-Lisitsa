@@ -22,3 +22,11 @@
   <%= link_to "#{@project.tasks.count} #{"Tasks"}", project_tasks_path(@project)  %>
   <% end %>
 </p>
+
+<p>
+  <% if @project.memberships != 1 %>
+  <%= link_to "#{@project.memberships.count} #{"Members"}", project_memberships_path(@project) %>
+  <% else %>
+  <%= link_to "#{@project.memberships.count} #{"Member"}", project_memberships_path(@project) %>
+  <% end %>
+</p>
