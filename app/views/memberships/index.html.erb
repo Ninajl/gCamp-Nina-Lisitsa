@@ -11,17 +11,25 @@
 <div class="well form-inline">
 
   <%= form_for [@project, @membership] do |f| %>
+  <div class='form-group'>
   <%= f.collection_select :user_id, User.all, :id, :fullname, {include_blank: "Please select user"}, {class: "form-control"} %>
+</div>
+<div class='form-group'>
   <%= f.select(:role, [["Member", :member],["Owner", :owner]], {include_blank: false}, {class: "form-control"}) %>
+</div>
   <%= f.submit 'Add New Member', class: 'btn btn-primary' %>
   <% end %>
 </div>
 
 <div class="form-inline">
-<% @memberships.each do |membership| %>
+<% @project.memberships.each do |membership| %>
 <%= form_for [@project, membership] do |f| %>
+<div class="form-group col-md-2">
 <%= membership.user.fullname %>
+</div>
+<div class="form-group col-md-2">
 <%= f.select(:role, [["Member", :member],["Owner", :owner]], {include_blank: false}, {class: "form-control"}) %>
+</div>
 <%= f.submit 'Update', class: 'btn btn-primary' %>
 
 
