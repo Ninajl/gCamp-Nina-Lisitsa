@@ -5,5 +5,5 @@ class Membership < ActiveRecord::Base
 
   enum role: [:member, :owner]
 
-  validates :user_id, presence: true, uniqueness: true
+  validates :user_id, presence: true, uniqueness: {scope: :project_id, message: "can't be blank"}
 end
