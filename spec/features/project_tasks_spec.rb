@@ -22,7 +22,7 @@ describe 'User can CRUD new project task' do
   end
 
   scenario "User can create a new Project Task" do
-    Project.create!(:name => "ProjectName")
+    project = Project.create!(:name => "ProjectName")
     visit '/projects'
     click_link "ProjectName"
     expect(page).to have_content("ProjectName")
@@ -38,28 +38,32 @@ describe 'User can CRUD new project task' do
   end
 
   scenario "User can view project task show page" do
-    Project.create!(:name => "ProjectName")
-    visit '/projects'
-    click_link "ProjectName"
-    expect(page).to have_content("ProjectName")
-    click_on "Task"
-    expect(page).to have_content("Tasks for Project")
+    project = Project.create!(:name => "Project Green")
+
+    visit "/projects/#{project.id}/tasks"
+    expect(page).to have_content "Project Green"
+
+    # task = Task.create!(:description => "TaskTwo")
     click_on "New Task"
 
 
-    fill_in 'task[description]', :with => "TaskName"
+    fill_in 'task[description]', :with => "Casey"
     click_on "Create Task"
+    expect(page).to have_content("Task was successfully created.")
 
-    expect(page).to have_content("TaskName")
+    click_on "Project Green"
+
+    click_on "Task"
+
     click_on "Show"
 
-    expect(page).to have_content("TaskName")
+    expect(page).to have_content "Due on"
 
   end
   # #
   scenario "User can edit a task" do
-    Project.create!(:name => "ProjectName")
-    visit '/projects'
+    project = Project.create!(:name => "ProjectName")
+    visit "/projects/#{project.id}/tasks"
     click_link "ProjectName"
     expect(page).to have_content("ProjectName")
     click_on "Task"
@@ -80,19 +84,20 @@ describe 'User can CRUD new project task' do
   end
   #
   scenario "User can delete a task" do
-    Project.create!(:name => "ProjectName")
-    visit '/projects'
-    click_link "ProjectName"
-    expect(page).to have_content("ProjectName")
-    click_on "Task"
-    expect(page).to have_content("Tasks for Project")
+    project = Project.create!(:name => "Project Green")
+    visit "/projects/#{project.id}/tasks"
+    expect(page).to have_content "Project Green"
+
     click_on "New Task"
 
 
-    fill_in 'task[description]', :with => "TaskName"
+    fill_in 'task[description]', :with => "Nina"
     click_on "Create Task"
 
-    expect(page).to have_content("TaskName")
+    expect(page).to have_content "Nina"
+
+    click_on "Project Green"
+    click_on "Task"
     click_on "Delete"
     expect(page).to have_content "Tasks for Project"
   end

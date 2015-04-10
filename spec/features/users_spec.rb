@@ -15,10 +15,10 @@ require 'rails_helper'
       click_on "Sign In"
       expect(page).to have_content("Sign into gCamp!")
 
-      fill_in "Email", with: @user.email
-      fill_in "Password", with: @user.password
+      fill_in "Email", with: user.email
+      fill_in "Password", with: user.password
       click_button "Sign In"
-      expect(page).to have_content(@user.email)
+      expect(page).to have_content(user.email)
     end
 
     scenario "User can create a new User" do
@@ -37,32 +37,46 @@ require 'rails_helper'
     end
 
     scenario "User can view user show page" do
-
+      user = User.create!(
+      first_name: "Name",
+      last_name: "LastName",
+      email: "Test1@Email.com",
+      password: "P",
+      password_confirmation: "P"
+      )
       visit "/users"
 
-      click_on @user.fullname
-      expect(page).to have_content(@user.fullname)
+        click_on user.fullname
+      expect(page).to have_content("First name")
 
     end
 
     scenario "User can edit a user" do
-      visit "/users"
-      # click_on "TestName"
-      # expect(page).to have_content("TestName")
-      expect(page).to have_content(@user.fullname)
-      click_on "Edit"
-      expect(page).to have_content("Edit User")
 
-      fill_in 'user[first_name]', :with => "TestEdit"
-      fill_in 'user[last_name]', :with => "TestLastEdit"
-      fill_in 'user[email]', :with => "Testedit@Email.com"
+      user = User.create!(
+      first_name: "Name",
+      last_name: "LastName",
+      email: "Test1@Email.com",
+      password: "P",
+      password_confirmation: "P"
+      )
+      visit "/users/#{user.id}"
+      #
+      # click_on user.fullname
+      # expect(page).to have_content(user.fullname)
+
+      click_link "Edit"
+      expect(page).to have_content("First name")
+
+      fill_in 'user[first_name]', :with => "Do"
+      fill_in 'user[last_name]', :with => "Be"
+      fill_in 'user[email]', :with => "dobe@Email.com"
       fill_in 'user[password]', :with => "T"
       fill_in 'user[password_confirmation]', :with => "T"
 
       click_on "Update User"
       expect(page).to have_content("User was successfully updated.")
-      expect(page).to have_content("TestEdit TestLastEdit")
-      expect(page).to_not have_content(@user.fullname)
+
     end
 
     scenario "User can delete a user" do
