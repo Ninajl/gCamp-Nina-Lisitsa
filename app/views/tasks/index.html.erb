@@ -27,8 +27,9 @@
   <tbody>
     <% @project.tasks.each do |task| %>
     <tr>
-      <td><%= link_to task.description, project_task_path(@project, task) %></td>
-      <span class= 'badge'></span>
+      <td><%= link_to task.description, project_task_path(@project, task) %>
+      <span class= 'badge'> <%= task.comments.count %></span></td>
+
       <td><%= task.completed %></td>
       <td><%= task.task_due_date.strftime("%m/%d/%Y") %></td>
       <td><div class=text-right>
