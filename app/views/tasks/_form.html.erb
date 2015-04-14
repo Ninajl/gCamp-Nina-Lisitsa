@@ -23,10 +23,10 @@
 </div>
 
 <% if @task.description != nil %>
-
+ <!-- same as unless @task.description == nill -->
 <div class="form-group">
   <div class="control-label col-md-2">
-    Completed
+    <%= f.label :completed %>
   </div>
   <div class="col-md-4">
     <%= f.check_box(:completed) %>
