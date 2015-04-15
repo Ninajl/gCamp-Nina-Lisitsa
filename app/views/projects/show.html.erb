@@ -3,8 +3,6 @@
 <div class=page-header>
   <div class=pull-right>
     <%= link_to 'Edit', edit_project_path(@project), class: 'btn btn-info' %>
-    <%= link_to 'Delete', project_path(@project), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
-    <!-- <%= link_to 'New Task', new_project_task_path(@project), class: 'btn btn-primary' %> -->
   </div>
 
 <h1><strong><%= @project.name %></strong></h1>
@@ -30,3 +28,9 @@
   <%= link_to "#{@project.memberships.count} #{"Member"}", project_memberships_path(@project) %>
   <% end %>
 </p>
+
+<div class="well">
+  <h4>Delete Project</h4>
+  <p>Deleting this project will also delete <%= "#{@project.memberships.count} #{"memberships"}" %>, <%= "#{@project.tasks.count}" %> task and associated comments.</p>
+  <%= link_to 'Delete', project_path(@project), method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+</div>
