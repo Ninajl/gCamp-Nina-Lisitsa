@@ -25,7 +25,7 @@
   <div class="row">
     <div class="col-md-3">
       <p><%= link_to comment.user.fullname, user_path(comment.user_id) %></p>
-      <p class="text-muted"> <%= time_ago_in_words(comment.created_at) %>ago</p>
+      <p class="text-muted"> <%= time_ago_in_words(comment.created_at) %> ago</p>
     </div>
     <div class="col-md-9 pull-right">
       <%= comment.post %>
