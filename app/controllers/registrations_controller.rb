@@ -8,7 +8,7 @@ class RegistrationsController <ApplicationController
     @user = User.new(params.require(:user).permit(:first_name, :last_name, :email, :password, :password_confirmation))
     if @user.save
       session[:user_id] = @user.id
-      redirect_to signin_path, notice: "Successfully Signed Up. Please Sign In!"
+      redirect_to new_project_path, notice: "Successfully Signed Up! Please create a new project."
     else
       render :new
     end

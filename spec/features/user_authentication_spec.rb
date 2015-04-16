@@ -11,7 +11,7 @@ describe 'User can register, sign in and sign out' do
     fill_in 'Password', :with => "test11"
     fill_in 'Password confirmation', :with => "test11"
     click_button 'Sign Up'
-    expect(page).to have_content "Sign into gCamp!"
+    expect(page).to have_content "Successfully Signed Up! Please create a new project."
   end
 
   scenario 'User can Sign in with valid date' do
@@ -21,7 +21,7 @@ describe 'User can register, sign in and sign out' do
     fill_in 'Email', :with => "nina@go.com"
     fill_in 'Password', :with => "test11"
     fill_in 'Password confirmation', :with => "test11"
-    click_button 'Sign Up'
+    expect(page).to have_content 'Successfully Signed Up! Please create a new project.'
 
     visit '/signin'
     fill_in 'Email', :with => "nina@go.com"
