@@ -55,13 +55,13 @@ private
   def set_owner
     @project = Project.find(params[:id])
     unless current_user.project_owner?(@project)
-      redirect_to project_path, notice: "Sorry you do not have access"
+      redirect_to project_path, alert: "Sorry you do not have access"
     end
   end
 
   def set_project
     unless @project && @project.users.include?(current_user)
-      redirect_to projects_path, notice: "You do not have access to that project"
+      redirect_to projects_path, alert: "You do not have access to that project"
   end
 end
 

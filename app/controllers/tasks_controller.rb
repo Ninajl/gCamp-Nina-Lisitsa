@@ -1,6 +1,7 @@
 class TasksController < ApplicationController
   before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
+  before_action :set_project
 
   # GET /tasks
   # GET /tasks.json
@@ -69,5 +70,11 @@ class TasksController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def task_params
       params.require(:task).permit(:description, :task_due_date, :completed, :project_id)
+    end
+
+    def set_project
+      unless @project && @project.users.include?(current_user)
+        redirect_to projects_path, alert: "You do not have access to that project"
+      end
     end
 end
