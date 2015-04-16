@@ -1,7 +1,7 @@
 class ProjectsController <ApplicationController
   before_action :authenticate
   before_action :set_owner, only: [:edit, :update, :destroy]
-  before_action :set_project, only: [:edit,:update, :destroy]
+  before_action :set_project, only: [:edit,:update, :destroy, :show]
 
   def index
     @projects = current_user.projects
@@ -55,13 +55,13 @@ private
   def set_owner
     @project = Project.find(params[:id])
     unless current_user.project_owner?(@project)
-      redirect_to project_path, alert: "Sorry you do not have access"
+      redirect_to project_path, alert: "You do not have access"
     end
   end
 
   def set_project
     @project = Project.find(params[:id])
-    unless @project && @project.users.include?(current_user)
+    unless @project.users.include?(current_user)
       redirect_to projects_path, alert: "You do not have access to that project"
   end
 end
