@@ -1,5 +1,8 @@
 class MembershipsController < ApplicationController
 
+  before_action :set_project, only: [:edit,:update, :destroy]
+
+
   def index
     @project = Project.find(params[:project_id])
     @memberships = @project.memberships.all
@@ -41,6 +44,13 @@ class MembershipsController < ApplicationController
 
   def membership_params
     params.require(:membership).permit(:project_id, :user_id, :role)
+  end
+
+  def set_project
+    @project = Project.find(params[:project_id])
+    unless @project && @project.users.include?(current_user)
+      redirect_to projects_path, alert: "You do not have access to that project"
+    end
   end
 
 end

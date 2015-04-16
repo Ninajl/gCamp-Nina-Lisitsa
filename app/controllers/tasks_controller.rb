@@ -1,8 +1,8 @@
 class TasksController < ApplicationController
   before_action :authenticate
   before_action :set_task, only: [:show, :edit, :update, :destroy]
-  before_action :set_project
-
+  before_action :set_project, only: [:edit,:update, :destroy]
+  
   # GET /tasks
   # GET /tasks.json
   def index
