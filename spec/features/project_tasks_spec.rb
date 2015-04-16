@@ -51,12 +51,6 @@ describe 'User can CRUD new project task' do
     click_on "Create Task"
     expect(page).to have_content("Task was successfully created.")
 
-    click_on "Project Green"
-
-    click_on "Task"
-
-    click_on "Show"
-
     expect(page).to have_content "Due on"
 
   end
@@ -85,20 +79,12 @@ describe 'User can CRUD new project task' do
   #
   scenario "User can delete a task" do
     project = Project.create!(:name => "Project Green")
+    task = Task.create!(:description => "Nina", :project_id => project.id, :task_due_date => "1984/01/15")
+
     visit "/projects/#{project.id}/tasks"
     expect(page).to have_content "Project Green"
 
-    click_on "New Task"
-
-
-    fill_in 'task[description]', :with => "Nina"
-    click_on "Create Task"
-
-    expect(page).to have_content "Nina"
-
-    click_on "Project Green"
-    click_on "Task"
-    click_on "Delete"
+    page.click_link('', :href => "/projects/#{project.id}/tasks/#{task.id}")
     expect(page).to have_content "Tasks for Project"
   end
 
