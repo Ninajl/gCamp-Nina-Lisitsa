@@ -1,5 +1,7 @@
 class ProjectsController <ApplicationController
   before_action :authenticate
+  before_action :set_owner, only: [:edit, :update, :destroy]
+
 
   def index
     @projects = Project.all
@@ -12,6 +14,7 @@ class ProjectsController <ApplicationController
   def create
     @project = Project.new(project_params)
     if @project.save
+      project_owner
       redirect_to @project, notice: "Project was successfully created"
 
     else
@@ -20,7 +23,7 @@ class ProjectsController <ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
+
   end
 
   def show
@@ -28,7 +31,6 @@ class ProjectsController <ApplicationController
   end
 
   def update
-    @project = Project.find(params[:id])
     if @project.update(project_params)
       redirect_to project_path, notice: "Project was successfully updated"
 
@@ -38,7 +40,6 @@ class ProjectsController <ApplicationController
   end
 
   def destroy
-    @project = Project.find(params[:id])
     if @project.destroy
       redirect_to projects_path, alert: 'Project was successfully destroyed'
     else
@@ -47,8 +48,15 @@ class ProjectsController <ApplicationController
   end
 
 private
-def project_params
-  params.require(:project).permit(:name)
-end
+  def project_params
+    params.require(:project).permit(:name)
+  end
+
+  def set_owner
+    @project = Project.find(params[:id])
+    unless current_user.project_owner?(@project)
+      redirect_to project_path, notice: "Sorry you do not have access"
+    end
+  end
 
 end
