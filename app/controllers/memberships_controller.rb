@@ -55,7 +55,7 @@ class MembershipsController < ApplicationController
 
   def set_project
     @project = Project.find(params[:project_id])
-    unless @project.users.include?(current_user)
+    unless @project.users.include?(current_user) || current_user.admin == true
       redirect_to projects_path, alert: "You do not have access to that project"
     end
   end
