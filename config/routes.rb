@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :memberships
   end
 
-  root 'sessions#new'
+  root 'welcome#index'
 
    get 'faq'=>'faq#index'
 
