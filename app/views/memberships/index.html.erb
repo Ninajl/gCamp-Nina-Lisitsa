@@ -54,11 +54,18 @@
       <tr>
         <td><%= link_to membership.user.fullname, user_path(membership.user) %></td>
         <td><%= membership.role %></td>
+        <% if current_user.id == membership.user.id %>
+        <td><%= link_to project_membership_path(@project, membership), method: :delete, data: {confirm: 'Are you sure'} do %>
+        <span class= "glyphicon glyphicon-remove"></span></td>
+        <% end %>
+        <% else %>
+        <td></td>
+        <% end %>
+        <% end %>
       </tr>
       <% end %>
     </tbody>
   </table>
 
-  <% end %>
 
 </div>

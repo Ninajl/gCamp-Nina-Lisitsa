@@ -1,8 +1,8 @@
 class MembershipsController < ApplicationController
 
-  before_action :set_project, only: [:edit,:update, :destroy, :index]
-  before_action :set_owner, only: [:edit, :update, :destroy]
-  
+  before_action :set_project, only: [:edit,:update, :index, :destroy]
+  before_action :set_owner, only: [:edit, :update]
+
 
   def index
     @project = Project.find(params[:project_id])
@@ -37,8 +37,11 @@ class MembershipsController < ApplicationController
   def destroy
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    @membership.destroy
-    redirect_to project_memberships_path(@project), notice: "#{@membership.user.fullname} was successfully destroyed!"
+    if @membership.destroy && @membership.user.id == current_user.id
+      redirect_to projects_path, notice: "#{@membership.user.fullname} was successfully removed!"
+    else
+      redirect_to project_memberships_path(@project), notice: "#{@membership.user.fullname} was successfully destroyed!"
+    end
   end
 
   private
