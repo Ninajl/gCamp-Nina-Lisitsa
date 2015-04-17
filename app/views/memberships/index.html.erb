@@ -9,7 +9,7 @@
 </ol>
 <%= render 'shared/error', object: @membership %>
 
-  <% if current_user.project_owner?(@project) %>
+  <% if current_user.admin == true || current_user.project_owner?(@project) %>
 
 <div class="well form-inline">
   <%= form_for [@project, @membership] do |f| %>

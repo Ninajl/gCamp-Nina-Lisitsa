@@ -26,7 +26,7 @@ class UsersController <ApplicationController
 
       def edit
         @user = User.find(params[:id])
-        unless current_user.id == @user.id
+        unless current_user.id || current_user.admin == @user
           render :file => "/public/404.html", :status => 404
         end
       end

@@ -18,5 +18,8 @@ class User < ActiveRecord::Base
     project.memberships.find_by(role: Membership.roles["owner"], user_id: id)
   end
 
+  def admin?(current_user)
+    current_user.admin == true
+  end
 
 end

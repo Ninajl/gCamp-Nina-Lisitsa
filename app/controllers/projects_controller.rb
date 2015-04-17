@@ -3,8 +3,13 @@ class ProjectsController <ApplicationController
   before_action :set_owner, only: [:edit, :update, :destroy]
   before_action :set_project, only: [:edit,:update, :destroy, :show]
 
+
   def index
+    if current_user.admin == true
+      @projects = Project.all
+    else
     @projects = current_user.projects
+    end
   end
 
   def new
@@ -64,6 +69,7 @@ private
     unless @project.users.include?(current_user)
       redirect_to projects_path, alert: "You do not have access to that project"
   end
+
 end
 
 end
