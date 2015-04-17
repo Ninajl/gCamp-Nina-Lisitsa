@@ -20,7 +20,11 @@
 <% @users.each do |user| %>
 <tr>
   <td><%= link_to user.fullname, user_path(user) %></td>
+  <% if current_user.id == user.id %>
   <td><%= mail_to user.email %></td>
+  <% else %>
+  <td></td>
+  <% end %>
   <td><div class=text-right><%= link_to 'Edit', edit_user_path(user), class:'btn btn-primary' %></td>
     <td><%= link_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></div></td>
 </tr>
