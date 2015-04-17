@@ -7,7 +7,8 @@
   <li class="active"><%= link_to @project.name, project_path(@project) %></li>
   <li class="active">Memberships</li>
 </ol>
-<%= render 'shared/error', object: @membership %>
+
+  <%= render 'shared/error', object: @membership %>
 
   <% if current_user.admin == true || current_user.project_owner?(@project) %>
 
@@ -38,13 +39,20 @@
   <div class="form-group">
     <%= f.submit 'Update', class: 'btn btn-primary' %>
 
-
+    <% if membership.owner? && @project.memberships.where(role: 1).count == 1 %>
+    "You are the last owner!"
+    <% else %>
     <%= link_to project_membership_path(@project, membership), method: :delete, data: {confirm: 'Are you sure'} do %>
     <span class= "glyphicon glyphicon-remove"></span>
+    <% end %>
+    <% end   %>
   </div>
+
+
   <% end %>
   <% end %>
-  <% end %>
+
+
 
   <% else %>
 

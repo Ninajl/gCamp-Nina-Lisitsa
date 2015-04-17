@@ -30,8 +30,11 @@ class MembershipsController < ApplicationController
   def update
     @project = Project.find(params[:project_id])
     @membership = Membership.find(params[:id])
-    @membership.update(membership_params)
+     if @membership.update(membership_params)
       redirect_to project_memberships_path(@project), notice: "#{@membership.user.fullname} was successfully updated!"
+    else
+      render :index
+    end
   end
 
   def destroy
@@ -58,7 +61,7 @@ class MembershipsController < ApplicationController
   end
 
   def set_owner
-    @project = Project.find(params[:id])
+    @project = Project.find(params[:project_id])
     unless current_user.project_owner?(@project)
       redirect_to project_path, alert: "You do not have access"
     end
