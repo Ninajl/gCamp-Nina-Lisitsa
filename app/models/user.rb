@@ -18,4 +18,5 @@ class User < ActiveRecord::Base
     project.memberships.find_by(role: Membership.roles["owner"], user_id: id)
   end
 
+
 end
