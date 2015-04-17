@@ -25,9 +25,12 @@
   <% else %>
   <td></td>
   <% end %>
-  <% if current_user.admin == true %>
-  <td><div class=text-right><%= link_to 'Edit', edit_user_path(user), class:'btn btn-primary' %></td>
-    <td><%= link_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %></div></td>
+  <% if current_user.admin == true || user == current_user %>
+  <td class=pull-right><%= link_to 'Edit', edit_user_path(user) %>
+  <%= link_to 'Delete', user, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-danger' %>
+  </td>
+  <% else %>
+  <td></td>
   <% end %>
 </tr>
 <% end %>
