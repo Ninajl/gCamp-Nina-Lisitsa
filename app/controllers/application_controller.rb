@@ -12,6 +12,7 @@ class ApplicationController < ActionController::Base
 
   def authenticate
     if not current_user
+      session[:previous_url]  = request.fullpath
       redirect_to signup_path, notice: "Not signed in!"
     end
 
