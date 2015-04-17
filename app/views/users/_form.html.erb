@@ -43,6 +43,16 @@
     <%= f.password_field :password_confirmation, class: "form-control" %><br>
   </div>
 </div>
+<% if current_user.admin == true %>
+<div class="form-group">
+  <div class="control-label col-md-2">
+    <%= f.label :admin %>
+  </div>
+  <div class="col-md-4">
+    <%= f.check_box(:admin) %>
+  </div>
+</div>
+<% end %>
 <div class="form-group">
   <div class="col-md-4 col-md-offset-2">
     <div class="action">
