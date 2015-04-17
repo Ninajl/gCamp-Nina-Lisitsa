@@ -16,7 +16,6 @@
 
 </ol>
 <p id="task_count">
-  <% if current_user.admin == true %>
   <% if @project.tasks.count != 0 %>
   <%= link_to "#{@project.tasks.count} #{"Task"}", project_tasks_path(@project)  %>
   <% else %>
@@ -29,7 +28,6 @@
   <%= link_to "#{@project.memberships.count} #{"Members"}", project_memberships_path(@project) %>
   <% else %>
   <%= link_to "#{@project.memberships.count} #{"Member"}", project_memberships_path(@project) %>
-  <% end %>
   <% end %>
 </p>
 

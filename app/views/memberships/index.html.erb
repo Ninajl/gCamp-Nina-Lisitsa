@@ -42,6 +42,7 @@
     <% if membership.owner? && @project.memberships.where(role: 1).count == 1 %>
     "You are the last owner!"
     <% else %>
+    
     <%= link_to project_membership_path(@project, membership), method: :delete, data: {confirm: 'Are you sure'} do %>
     <span class= "glyphicon glyphicon-remove"></span>
     <% end %>

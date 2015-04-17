@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-scenario "Admin can CRUD projects" do
+describe "Admin can CRUD projects" do
 
   before :each do
     user = User.create(
@@ -8,19 +8,18 @@ scenario "Admin can CRUD projects" do
     last_name: "adminLastName",
     email: "admin@Email.com",
     password: "P",
-    password_confirmation: "P"
-    admin: true
+    admin: true,
     )
     visit root_path
 
-    click_on "Sign In"
-    expect(page).to have_content("Sign into gCamp!")
+    expect(page).to have_link("Sign In")
 
     fill_in "Email", with: user.email
     fill_in "Password", with: user.password
     click_button "Sign In"
     expect(page).to have_content(user.email)
-    expect(page).to have_contentSuccessfully("Logged In!")
+    expect(page).to have_content("Successfully Logged In!")
+    Project.create!(:name => "TestName")
 
   end
 
@@ -31,6 +30,27 @@ scenario "Admin can CRUD projects" do
     #
     # fill_in 'project[name]', :with => "TestName"
     # click_on "Create Project"
+    expect(page).to have_content("Projects")
+  end
+
+  scenario "Admin can delete all user projects" do
+  visit '/projects'
+  click_on "#{project.name}"
+  expect(page).to have_content("#{project.name}")
+  click_on "Delete"
+  end
+
+  scenario "Admin can edit all users" do
+    visit '/users'
+    click_on "#{user.fullname}"
+    expect(page).to have_content("#{user.fullname}")
+    click_on "Edit"
+  end
+
+  scenario "Admin can delete all users" do
+    visit '/projects'
+    click_on "#{project.name}"
     expect(page).to have_content("#{project.name}")
+    click_on "Delete"
   end
 end
