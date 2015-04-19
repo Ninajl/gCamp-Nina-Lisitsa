@@ -19,17 +19,12 @@ describe "Admin can CRUD projects" do
     click_button "Sign In"
     expect(page).to have_content(user.email)
     expect(page).to have_content("Successfully Logged In!")
-    Project.create!(:name => "TestName")
+    project = Project.create!(:name => "TestName")
 
   end
 
   scenario "Admin can see all Projects" do
     visit '/projects'
-    # click_on "New Project"
-    # expect(page).to have_content("Create Project")
-    #
-    # fill_in 'project[name]', :with => "TestName"
-    # click_on "Create Project"
     expect(page).to have_content("Projects")
   end
 
@@ -49,8 +44,8 @@ describe "Admin can CRUD projects" do
 
   scenario "Admin can delete all users" do
     visit '/projects'
-    click_on "#{project.name}"
-    expect(page).to have_content("#{project.name}")
+    click_on "#{user.fullname}"
+    expect(page).to have_content("#{user.fullname}")
     click_on "Delete"
   end
 end
