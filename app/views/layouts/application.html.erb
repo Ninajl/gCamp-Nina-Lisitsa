@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GCamp_NinaJL</title>
+  <title>TaskMe_NinaJL</title>
   <%= favicon_link_tag 'pink_butterfly.png' %>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
@@ -15,9 +15,9 @@
 
       <div class="navbar-header">
         <% if current_user %>
-        <a class="navbar-brand" href="/projects">gCamp</a>
+        <a class="navbar-brand" href="/projects">TaskMe</a>
         <% else %>
-        <a class="navbar-brand" href="/">gCamp</a>
+        <a class="navbar-brand" href="/">TaskMe</a>
         <% end %>
 
         <% if current_user %>
@@ -25,7 +25,7 @@
 
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button">Projects<span class="caret"></span></a>
-            <ul class="dropdown-menu" role="menu">
+            <ul class="dropdown-menu" role="menu" id='dropdown'>
               <% current_user.projects.each do |project| %>
               <li><%= link_to project.name, project_path(project) %></li>
               <% end %>
@@ -91,7 +91,7 @@
           <% else %>
 
           <div class="col-md-6">
-            
+
           <%= link_to "About", about_path %>
 
           |

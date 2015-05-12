@@ -25,15 +25,17 @@
       <% else %>
       <td></td>
       <% end %>
+
       <% if current_user.admin == true || user == current_user %>
-      <td class=pull-right>
+      <td class='text-right'>
         <%= link_to 'Edit', edit_user_path(user), class: 'btn btn-default' %>
 
         <%= link_to user_path(user), method: :delete, data: {confirm: 'Are you sure?'} do %>
           <span class= "glyphicon glyphicon-remove"></span>
           <% end %>
-
       </td>
+      <% else %>
+      <td></td>
       <% end %>
       </tr>
       <% end %>
