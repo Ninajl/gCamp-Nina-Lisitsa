@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe "Admin can CRUD projects" do
+  let (:project) { Project.create!(:name => "TestName") }
 
   before :each do
     user = User.create(
@@ -19,7 +20,6 @@ describe "Admin can CRUD projects" do
     click_button "Sign In"
     expect(page).to have_content(user.email)
     expect(page).to have_content("Successfully Logged In!")
-    project = Project.create!(:name => "TestName")
 
   end
 
@@ -30,6 +30,7 @@ describe "Admin can CRUD projects" do
 
   scenario "Admin can delete all user projects" do
   visit '/projects'
+  save_and_open_page
   click_on "#{project.name}"
   expect(page).to have_content("#{project.name}")
   click_on "Delete"
